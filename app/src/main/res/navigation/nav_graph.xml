@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/instructionsFragment">
+
+    <fragment
+        android:id="@+id/instructionsFragment"
+        android:name="br.com.example.fragments.InstructionsFragment"
+        tools:layout="@layout/fragment_instructions" />
+
+    <action
+        android:id="@+id/action_to_faceDetectionResultFragment"
+        app:destination="@id/faceDetectionResultFragment" />
+
+    <fragment
+        android:id="@+id/faceDetectionResultFragment"
+        android:name="br.com.example.fragments.FaceDetectionResultFragment"
+        tools:layout="@layout/fragment_face_detection_result">
+        <argument
+            android:name="result"
+            app:argType="br.com.example.FaceDetectionResult" />
+    </fragment>
+
+</navigation>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Next Code Face Detection</string>
+
+    <!--FaceDetectionResultFragment-->
+    <string name="verification_completed_successfully">Verificação concluída com sucesso</string>
+    <string name="congratulations_your_facial_check_has_been_successfully_completed">Parabéns, sua verificação facial foi concluída com sucesso!</string>
+    <string name="text_continue">Continuar</string>
+    <string name="verification_could_not_be_completed">Não foi possível concluir a verificação</string>
+    <string name="please_try_to_take_your_photo_again">Por favor tente tirar a sua foto novamente.</string>
+    <string name="try_again">Tentar novamente</string>
+
+    <!--InstructionsFragment-->
+    <string name="instructions">Instruções</string>
+    <string name="ok_letsgo">Ok, vamos lá</string>
+    <string name="position_your_face_centered_in_the_enclosed_area">Posicione o seu rosto  centralizado na área delimitada.</string>
+    <string name="keep_a_neutral_expression">Mantenha uma expressão neutra.</string>
+    <string name="keep_your_eyes_open">Mantenha os olhos abertos.</string>
+    <string name="look_for_a_well_lit_place">Procure um local bem ilumidado.</string>
+    <string name="remove_any_type_of_accessory">Retire qualquer tipo de acessório.</string>
+
+</resources>
