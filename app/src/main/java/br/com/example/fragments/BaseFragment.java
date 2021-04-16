@@ -2,12 +2,20 @@ package br.com.example.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import br.com.example.FaceDetectionResult;
 import br.com.nxcd.facedetection.NxcdFaceDetection;
@@ -23,10 +31,15 @@ public class BaseFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
 
                 boolean result = false;
+                Bitmap bitmap = null;
                 if (data != null && data.getExtras() != null) {
                     result = data.getExtras().getBoolean(NxcdFaceDetection.RESULT);
+                    try {
+                        bitmap = BitmapFactory.decodeStream(getContext().openFileInput(NxcdFaceDetection.IMAGE_RESULT));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
-
                 NavDirections action = InstructionsFragmentDirections.actionToFaceDetectionResultFragment(result ? FaceDetectionResult.SUCCESS : FaceDetectionResult.FAILURE);
                 if (getView() != null) {
                     Navigation.findNavController(getView()).navigate(action);
@@ -38,7 +51,8 @@ public class BaseFragment extends Fragment {
     }
 
     void startFaceDetection() {
-        NxcdFaceDetection nxcdFaceDetection = new NxcdFaceDetection(FACEDETECTION_REQUEST_CODE,"60522c5432a25800127b0e74:0QN0s2VrNSQigKPxu0uMNDiK");
+        NxcdFaceDetection nxcdFaceDetection = new NxcdFaceDetection(FACEDETECTION_REQUEST_CODE, "<TOKEN>");
+        nxcdFaceDetection.setHomologation();
         nxcdFaceDetection.startFaceDetection(this);
     }
 }
