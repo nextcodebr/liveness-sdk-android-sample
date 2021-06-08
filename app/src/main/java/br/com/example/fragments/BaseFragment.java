@@ -53,6 +53,7 @@ public class BaseFragment extends Fragment {
     void startFaceDetection() {
         NxcdFaceDetection nxcdFaceDetection = new NxcdFaceDetection(FACEDETECTION_REQUEST_CODE, "<TOKEN>");
         nxcdFaceDetection.setHomologation();
+        nxcdFaceDetection.setTimeout(90000);
         nxcdFaceDetection.startFaceDetection(this);
     }
 }
