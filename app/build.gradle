@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-    implementation 'br.com.nxcd:facedetection:1.0.13'
+    implementation 'br.com.nxcd:facedetection:1.0.14'
 
     def nav_version = "2.3.3"
 
