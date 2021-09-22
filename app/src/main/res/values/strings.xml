@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Next Code Face Detection</string>
 
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="close">Fechar</string>
+    <string name="do_you_want_capture_another_document_image">Deseja capturar outra imagem do documento?</string>
+
     <!--FaceDetectionResultFragment-->
     <string name="verification_completed_successfully">Verificação concluída com sucesso</string>
     <string name="congratulations_your_facial_check_has_been_successfully_completed">Parabéns, sua verificação facial foi concluída com sucesso!</string>
@@ -13,9 +18,31 @@
     <string name="instructions">Instruções</string>
     <string name="ok_letsgo">Ok, vamos lá</string>
     <string name="position_your_face_centered_in_the_enclosed_area">Posicione o seu rosto  centralizado na área delimitada.</string>
-    <string name="keep_a_neutral_expression">Mantenha uma expressão neutra.</string>
-    <string name="keep_your_eyes_open">Mantenha os olhos abertos.</string>
+    <string name="keep_a_neutral_expression_app_instruction">Mantenha uma expressão neutra.</string>
+    <string name="keep_your_eyes_open_app_instruction">Mantenha os olhos abertos.</string>
     <string name="look_for_a_well_lit_place">Procure um local bem ilumidado.</string>
     <string name="remove_any_type_of_accessory">Retire qualquer tipo de acessório.</string>
+    <string name="homolog_token">COLE SEU TOKEN !!!</string>
 
+    <!-- DocumentInstructionsFragment -->
+    <string name="position_your_document_centered_in_the_enclosed_area">Posicione o documento centralizado na área delimitada pela câmera.</string>
+    <string name="keep_your_device_steady_and_avoid_tilting">Mantenha o smartphone firme durante a captura e evite inclinar.</string>
+    <string name="place_the_document_without_a_cover_on_a_table">Coloque o documento sem capa sobre uma mesa.</string>
+    <string name="ocr_request_failed">OCR Falhou, para maiores detalhes verifique o log.\nDeseja tentar novamente?</string>
+    <string name="requesting_ocr">Solicitando OCR</string>
+
+    <!-- DocumentDetectionResultFragment -->
+    <string name="data_obtained_successfully">Dados obtidos com sucesso</string>
+    <string name="unable_to_get_the_data">Não foi possível obter os dados</string>
+    <string name="name">Nome: %1$s</string>
+    <string name="birthdate">Data de Nascimento: %1$s</string>
+    <string name="mothers_name">Nome da mãe: %1$s</string>
+    <string name="document_id">RG: %1$s</string>
+    <string name="federal_revenue_number">CPF: %1$s</string>
+    <string name="please_try_again_take_document_image">Por favor tente capturar a imagem do seu documento novamente.</string>
+
+    <!-- Welcome -->
+    <string name="how_can_assist">Como posso te ajudar hoje?</string>
+    <string name="take_document_flow">Capturar um documento</string>
+    <string name="take_face_flow">Capturar uma face</string>
 </resources>
