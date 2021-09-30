@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sdk_message_camera_permission_denied">Você não pode usar este recurso sem conceder a permissão de Camera</string>
+
+    <string name="sdk_label_processing">Processando</string>
+
+    <string name="sdk_tips_keep_a_neutral_expression">Mantenha uma expressão neutra</string>
+    <string name="sdk_tips_keep_your_eyes_open">Mantenha os olhos abertos</string>
+    <string name="sdk_tips_center_your_face">Centralize seu rosto</string>
+    <string name="sdk_tips_move_your_face_closer_to_the_device">Aproxime o seu rosto do dispositivo</string>
+    <string name="sdk_tips_move_your_face_far_to_the_device">Afaste o seu rosto do dispositivo</string>
+    <string name="sdk_tips_more_than_one_face_was_found_in_the_frame_of_camera">Foram encontrados mais de um rosto no enquadro da câmera</string>
+    <string name="sdk_tips_move_face_left">Vire para esquerda</string>
+    <string name="sdk_tips_move_face_right">Vire para direita</string>
+    <string name="sdk_tips_keep_head_aligned">Mantenha o rosto alinhado</string>
+    <string name="sdk_tips_error_taking_snaphot">Erro ao capturar Selfie</string>
+    <string name="sdk_tips_keep_center">Centralize o documento</string>
+    <string name="sdk_tips_too_far">Aproxime a câmera</string>
+    <string name="sdk_tips_too_near">Afaste a câmera</string>
+    <string name="sdk_tips_taking_photo">Capturando foto</string>
+    <string name="sdk_tips_taking_document">Capturando o documento</string>
+    <string name="sdk_tips_photo_has_good_quality">A foto ficou nítida?</string>
+    <string name="sdk_tips_error_taking_document_snapshot">Erro ao capturar documento</string>
+    <string name="sdk_tips_finding_document">Procurando documento</string>
+    <string name="sdk_label_no">Não</string>
+    <string name="sdk_label_yes">Sim</string>
+
+    <string name="sdk_content_description_preview">Pré-visualização</string>
+</resources>

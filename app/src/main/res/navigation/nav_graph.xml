@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@+id/instructionsFragment">
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
         android:id="@+id/instructionsFragment"
@@ -15,6 +15,16 @@
         app:destination="@id/faceDetectionResultFragment" />
 
     <fragment
+        android:id="@+id/documentDetectionResultFragment"
+        android:name="br.com.example.fragments.DocumentDetectionResultFragment"
+        tools:layout="@layout/fragment_document_detection_result">
+        <argument
+            android:name="result"
+            app:argType="br.com.example.models.ResponseBody"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
         android:id="@+id/faceDetectionResultFragment"
         android:name="br.com.example.fragments.FaceDetectionResultFragment"
         tools:layout="@layout/fragment_face_detection_result">
@@ -23,4 +33,25 @@
             app:argType="br.com.example.FaceDetectionResult" />
     </fragment>
 
+    <fragment
+        android:id="@+id/documentInstructionsFragment"
+        android:name="br.com.example.fragments.DocumentInstructionsFragment"
+        android:label="DocumentInstructionsFragment"
+        tools:layout="@layout/fragment_instructions">
+        <action
+            android:id="@+id/action_documentInstructionsFragment_to_documentDetectionResultFragment"
+            app:destination="@id/documentDetectionResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="br.com.example.fragments.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_instructionsFragment"
+            app:destination="@id/instructionsFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_documentInstructionsFragment"
+            app:destination="@id/documentInstructionsFragment" />
+    </fragment>
 </navigation>
