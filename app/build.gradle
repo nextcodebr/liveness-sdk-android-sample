@@ -4,18 +4,46 @@ plugins {
 
 apply plugin: "androidx.navigation.safeargs"
 
+// local.properties is gitignored and, unlike a -P flag, also applies to the IDE's Run button.
+// Gradle does not load it into project properties on its own -- AGP only reads sdk.dir from it --
+// so it is parsed explicitly here. A -P flag still wins when the file says nothing.
+def demoProperty = { String name ->
+    def file = rootProject.file('local.properties')
+    if (file.exists()) {
+        def props = new Properties()
+        file.withInputStream { props.load(it) }
+        def value = props.getProperty(name)
+        if (value != null && !value.trim().isEmpty()) {
+            return value.trim()
+        }
+    }
+    return project.findProperty(name) ?: ''
+}
+
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    namespace 'br.com.example'
+    compileSdk 34
 
     defaultConfig {
         applicationId "br.com.nextcodeexample"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdk 26
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    //   livenessToken=<serviceAccount:secret>
+    //   livenessBaseUrl=https://api-homolog.nxcd.app/   (optional; wins over
+    //                                                    setProduction/setHomologation)
+    defaultConfig {
+        buildConfigField "String", "LIVENESS_TOKEN", "\"${demoProperty('livenessToken')}\""
+        buildConfigField "String", "LIVENESS_BASE_URL", "\"${demoProperty('livenessBaseUrl')}\""
     }
 
     buildTypes {
@@ -31,26 +59,32 @@ android {
 }
 
 dependencies {
-    implementation 'br.com.nxcd:facedetection:1.0.14'
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
+
+    implementation 'br.com.nxcd:facedetection:3.0.0'
 
     def nav_version = "2.3.3"
     def retrofit_version = "2.9.0"
 
+
+
+
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.2'
+
+    implementation 'com.google.mlkit:barcode-scanning:17.3.0'
 
     /* Retrofit */
     implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofit_version}"
 
-    implementation 'com.kaopiz:kprogresshud:1.2.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

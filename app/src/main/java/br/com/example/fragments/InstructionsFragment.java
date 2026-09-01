@@ -26,6 +26,7 @@ import br.com.example.R;
 import br.com.example.adapters.InstructionsAdapter;
 import br.com.example.adapters.InstructionsVerticalSpaceDecoration;
 import br.com.nxcd.facedetection.NxcdFaceDetection;
+import br.com.nxcd.facedetection.core.utils.trace.ImageTrace;
 
 public class InstructionsFragment extends BaseFragment {
 
@@ -39,6 +40,13 @@ public class InstructionsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+        byte[] capture = br.com.nxcd.facedetection.core.utils.trace.ImageTrace.get().getCameraCapture();
+        Log.d("CameraCapture", "Capture Length: " + (capture == null ? 0 : capture.length));
+
+        
+
         return inflater.inflate(R.layout.fragment_instructions, container, false);
     }
 
@@ -107,9 +115,12 @@ public class InstructionsFragment extends BaseFragment {
     }
 
     protected void startFaceDetection() {
-        NxcdFaceDetection nxcdFaceDetection = new NxcdFaceDetection(DETECTION_REQUEST_CODE, getString(R.string.homolog_token));
+        NxcdFaceDetection nxcdFaceDetection = new NxcdFaceDetection(DETECTION_REQUEST_CODE, br.com.example.DemoConfig.token(requireContext()));
         nxcdFaceDetection.setHomologation();
-        //nxcdFaceDetection.setDevelopment();
+        // Production still runs the old getPixel: a marked JPEG comes back isAlive=false
+        // with a Nextid-Tag: 3 fraud header until that fix ships there.
+        // nxcdFaceDetection.setProduction();
+        //nxcdFaceDetection.setDevelopment(); qq
         nxcdFaceDetection.startFaceDetection(this);
     }
 }
