@@ -2,15 +2,53 @@
 
 SDK para detecção e padronização de fotos da face.
 
-### Android SDK Mínimo
+### Requisitos do consumidor
 
-A versão mínima do SDK do Android para a utilização do SDK é a 21.
+A partir da 3.0.0 — os dois são breaking em relação à 2.x:
+
+| Requisito | Valor | Se não atender |
+|---|---|---|
+| `minSdk` | **26** | o merge do manifesto falha |
+| `compileSdk` | **33 ou maior** (portanto AGP 7.2+) | o build quebra em `checkDebugAarMetadata`: `androidx.appcompat:1.6.1` e `androidx.lifecycle:2.6.2` declaram `minCompileSdk=33` |
+
+### Ambiente de build testado
+
+Esta é a configuração deste projeto de exemplo, validada consumindo o AAR publicado no feed:
+
+| | |
+|---|---|
+| Gradle | 8.10.2 |
+| Android Gradle Plugin | 8.7.3 |
+| JDK | 17 ou maior — testado com JBR 21 |
+| `compileSdk` / `targetSdk` | 34 |
+| `minSdk` | 26 |
+
+O AGP 8.x precisa de JDK 17+ para *rodar* (o `navigation-safe-args` 2.7.7 também). Isso é
+independente do `compileOptions`, que aqui continua em `VERSION_1_8`.
+
+**No Android Studio**, o Gradle JVM é uma configuração da IDE — ela não usa o `JAVA_HOME` do shell.
+Um build que passa no terminal ainda pode falhar no sync com:
+
+```
+Gradle JVM version incompatible.
+This project is configured to use an older Gradle JVM that supports up to version 8
+but the dependency 'com.android.tools.build:gradle:8.7.3' requires a Gradle JVM
+that supports version 11.
+```
+
+Ajuste em *Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JDK*. O `.idea/`
+não é versionado, justamente para que essa escolha seja de cada máquina.
 
 ### Gradle
 
-```
+O feed é de leitura **anônima**. Declare o repositório **sem** bloco `credentials` — um token
+expirado faz o feed responder 401, enquanto não enviar nada funciona.
+
+```groovy
 allprojects {
     repositories {
+        google()
+        mavenCentral()
         maven {
             url 'https://pkgs.dev.azure.com/nxcd/ef9b4772-b664-4276-aeca-9b430422da12/_packaging/nxcd_SDK/maven/v1'
         }
@@ -18,7 +56,23 @@ allprojects {
 }
 ```
 
-```implementation 'br.com.nxcd:facedetection:1.0.14```
+```groovy
+implementation 'br.com.nxcd:facedetection:3.0.0'
+```
+
+### Credenciais deste app de exemplo
+
+O token e a URL base saem de `local.properties` (não versionado, e — ao contrário de um `-P` —
+também vale para o botão Run da IDE). São lidos em `DemoConfig`:
+
+```properties
+livenessToken=<serviceAccount:secret>
+livenessBaseUrl=https://api-homolog.nxcd.app/
+```
+
+`livenessBaseUrl` é opcional: ele chama `AppState.get().setApiBaseURL(...)`, que tem precedência
+sobre `setProduction`/`setHomologation`/`setDevelopment`, então troca o ambiente sem editar código.
+Sem `livenessToken` o app falha com uma mensagem explicando o que preencher.
 
 ### Utilização
 
