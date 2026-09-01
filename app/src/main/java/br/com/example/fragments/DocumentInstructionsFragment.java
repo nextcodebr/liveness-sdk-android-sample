@@ -93,7 +93,7 @@ public class DocumentInstructionsFragment extends BaseFragment {
     }
 
     private void startDocumentDetection() {
-        final NxcdFaceDetection nxcdFaceDetection = new NxcdFaceDetection(REQUEST_CODE, getResources().getString(R.string.homolog_token), R.style.SDKTheme_Ex);
+        final NxcdFaceDetection nxcdFaceDetection = new NxcdFaceDetection(REQUEST_CODE, br.com.example.DemoConfig.token(requireContext()), R.style.SDKTheme_Ex);
         nxcdFaceDetection.setHomologation();
         //nxcdFaceDetection.setDevelopment();
         // TODO Outra forma de usar: nxcdFaceDetection.startDocumentDetection(this);
@@ -244,7 +244,7 @@ public class DocumentInstructionsFragment extends BaseFragment {
         httpClient.addInterceptor(chain -> {
             final Request request = chain.request()
                     .newBuilder()
-                    .addHeader("Authorization", "ApiKey " + getResources().getString(R.string.homolog_token)).build();
+                    .addHeader("Authorization", "ApiKey " + br.com.example.DemoConfig.token(requireContext())).build();
             return chain.proceed(request);
         });
 

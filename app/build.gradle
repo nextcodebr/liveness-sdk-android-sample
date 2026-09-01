@@ -4,6 +4,22 @@ plugins {
 
 apply plugin: "androidx.navigation.safeargs"
 
+// local.properties is gitignored and, unlike a -P flag, also applies to the IDE's Run button.
+// Gradle does not load it into project properties on its own -- AGP only reads sdk.dir from it --
+// so it is parsed explicitly here. A -P flag still wins when the file says nothing.
+def demoProperty = { String name ->
+    def file = rootProject.file('local.properties')
+    if (file.exists()) {
+        def props = new Properties()
+        file.withInputStream { props.load(it) }
+        def value = props.getProperty(name)
+        if (value != null && !value.trim().isEmpty()) {
+            return value.trim()
+        }
+    }
+    return project.findProperty(name) ?: ''
+}
+
 android {
     namespace 'br.com.example'
     compileSdk 34
@@ -20,6 +36,14 @@ android {
 
     buildFeatures {
         buildConfig true
+    }
+
+    //   livenessToken=<serviceAccount:secret>
+    //   livenessBaseUrl=https://api-homolog.nxcd.app/   (optional; wins over
+    //                                                    setProduction/setHomologation)
+    defaultConfig {
+        buildConfigField "String", "LIVENESS_TOKEN", "\"${demoProperty('livenessToken')}\""
+        buildConfigField "String", "LIVENESS_BASE_URL", "\"${demoProperty('livenessBaseUrl')}\""
     }
 
     buildTypes {
